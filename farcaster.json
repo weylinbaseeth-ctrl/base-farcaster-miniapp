@@ -1,0 +1,14 @@
+{
+  "miniapp": {
+    "name": "Weylin Arena",
+    "version": "1.0.0",
+    "iconUrl": "https://base-farcaster-miniapp.vercel.app/cover.png",
+    "homeUrl": "https://base-farcaster-miniapp.vercel.app",
+    "description": "1v1 and Solo challenges on Base",
+    "category": "game"
+  },
+
+  "baseBuilder": {
+    "allowed": true
+  }
+}
