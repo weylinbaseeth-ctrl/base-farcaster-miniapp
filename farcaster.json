@@ -15,6 +15,7 @@
   },
 
   "baseBuilder": {
-    "allowed": true
+    "allowed": true,
+    "ownerAddress": "0xf2d2b2dE6da6Ea33F51a352A528b2Ee15aC35af7"
   }
 }
