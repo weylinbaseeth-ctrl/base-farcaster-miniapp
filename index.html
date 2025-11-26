@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Base + Farcaster Mini App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Farcaster Frame -->
+  <meta property="fc:frame" content="vNext" />
+  <meta property="fc:frame:image" content="https://placehold.co/600x400?text=Base+MiniApp" />
+  <meta property="fc:frame:button:1" content="Connect Wallet" />
+  <meta property="fc:frame:post_url" content="https://example.com/api/frame" />
+
+  <!-- Coinbase / Base Wallet SDK -->
+  <script src="https://unpkg.com/@coinbase/wallet-sdk/dist/CoinbaseWalletSDK.min.js"></script>
+</head>
+
+<body style="font-family: Arial; text-align: center; padding: 40px;">
+
+  <h1>🚀 Base + Farcaster Mini App</h1>
+  <p>Tap button to connect your Base wallet</p>
+
+  <button onclick="connectWallet()" style="padding: 15px 25px; font-size: 18px;">
+    Connect Wallet
+  </button>
+
+  <p id="status"></p>
+
+  <script>
+    async function connectWallet() {
+      try {
+        const { CoinbaseWalletSDK } = window.CoinbaseWalletSDK;
+        const wallet = new CoinbaseWalletSDK({
+          appName: "Base Mini App",
+          darkMode: false,
+        });
+
+        const ethereum = wallet.makeWeb3Provider(
+          "https://mainnet.base.org",
+          8453
+        );
+
+        const accounts = await ethereum.request({
+          method: "eth_requestAccounts",
+        });
+
+        document.getElementById("status").innerText =
+          "✅ Connected: " + accounts[0];
+      } catch (err) {
+        document.getElementById("status").innerText =
+          "❌ Error: " + err.message;
+      }
+    }
+  </script>
+
+</body>
+</html>
