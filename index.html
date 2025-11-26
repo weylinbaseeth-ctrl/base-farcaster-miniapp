@@ -1,56 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8" />
   <title>Base + Farcaster Mini App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Farcaster Frame -->
+  <!-- Farcaster Mini App Meta -->
   <meta property="fc:frame" content="vNext" />
-  <meta property="fc:frame:image" content="https://placehold.co/600x400?text=Base+MiniApp" />
+  <meta property="fc:frame:image" content="https://base-farcaster-miniapp.vercel.app/cover.png" />
   <meta property="fc:frame:button:1" content="Connect Wallet" />
-  <meta property="fc:frame:post_url" content="https://example.com/api/frame" />
+  <meta property="fc:frame:button:1:action" content="link" />
+  <meta property="fc:frame:button:1:target" content="https://base-farcaster-miniapp.vercel.app/" />
 
-  <!-- Coinbase / Base Wallet SDK -->
+  <!-- Coinbase Wallet SDK -->
   <script src="https://unpkg.com/@coinbase/wallet-sdk/dist/CoinbaseWalletSDK.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.6.2/dist/ethers.umd.min.js"></script>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 40px;
+      background: #0a0a0a;
+      color: white;
+    }
+    button {
+      padding: 14px 20px;
+      font-size: 18px;
+      border: none;
+      background: #0052ff;
+      color: white;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 30px;
+    }
+  </style>
 </head>
 
-<body style="font-family: Arial; text-align: center; padding: 40px;">
+<body>
+  <h1>Base + Farcaster Mini App</h1>
+  <p>Connect your wallet on Base</p>
 
-  <h1>🚀 Base + Farcaster Mini App</h1>
-  <p>Tap button to connect your Base wallet</p>
+  <button onclick="connectWallet()">Connect Wallet</button>
 
-  <button onclick="connectWallet()" style="padding: 15px 25px; font-size: 18px;">
-    Connect Wallet
-  </button>
-
-  <p id="status"></p>
+  <p id="status">Not connected</p>
 
   <script>
     async function connectWallet() {
-      try {
-        const { CoinbaseWalletSDK } = window.CoinbaseWalletSDK;
-        const wallet = new CoinbaseWalletSDK({
-          appName: "Base Mini App",
-          darkMode: false,
-        });
-
-        const ethereum = wallet.makeWeb3Provider(
-          "https://mainnet.base.org",
-          8453
-        );
-
-        const accounts = await ethereum.request({
-          method: "eth_requestAccounts",
-        });
-
-        document.getElementById("status").innerText =
-          "✅ Connected: " + accounts[0];
-      } catch (err) {
-        document.getElementById("status").innerText =
-          "❌ Error: " + err.message;
+      if (!window.ethereum) {
+        alert("No wallet found. Use Coinbase Wallet or MetaMask");
+        return;
       }
+
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const accounts = await provider.send("eth_requestAccounts", []);
+      const address = accounts[0];
+
+      document.getElementById("status").innerText =
+        "Connected: " + address;
     }
   </script>
-
 </body>
 </html>
