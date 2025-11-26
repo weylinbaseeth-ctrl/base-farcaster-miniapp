@@ -5,34 +5,47 @@
   <title>Base + Farcaster Mini App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Farcaster Mini App Meta -->
+  <!-- ✅ CORRECT FARCASTER FRAME META -->
   <meta property="fc:frame" content="vNext" />
   <meta property="fc:frame:image" content="https://base-farcaster-miniapp.vercel.app/cover.png" />
-  <meta property="fc:frame:button:1" content="Connect Wallet" />
+  <meta property="fc:frame:button:1" content="Open Mini App" />
   <meta property="fc:frame:button:1:action" content="link" />
-  <meta property="fc:frame:button:1:target" content="https://base-farcaster-miniapp.vercel.app/" />
+  <meta property="fc:frame:button:1:target" content="https://base-farcaster-miniapp.vercel.app" />
 
-  <!-- Coinbase Wallet SDK -->
-  <script src="https://unpkg.com/@coinbase/wallet-sdk/dist/CoinbaseWalletSDK.min.js"></script>
+  <!-- ethers.js (no Coinbase SDK needed anymore) -->
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.6.2/dist/ethers.umd.min.js"></script>
 
   <style>
     body {
-      font-family: sans-serif;
+      font-family: Arial, sans-serif;
       text-align: center;
-      padding: 40px;
+      padding: 30px 20px;
       background: #0a0a0a;
       color: white;
     }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
     button {
       padding: 14px 20px;
-      font-size: 18px;
+      font-size: 16px;
       border: none;
       background: #0052ff;
       color: white;
       border-radius: 12px;
       cursor: pointer;
-      margin-top: 30px;
+      margin-top: 20px;
+      width: 80%;
+      max-width: 260px;
+    }
+
+    #status {
+      margin-top: 20px;
+      font-size: 14px;
+      word-break: break-all;
     }
   </style>
 </head>
@@ -47,18 +60,33 @@
 
   <script>
     async function connectWallet() {
-      if (!window.ethereum) {
-        alert("No wallet found. Use Coinbase Wallet or MetaMask");
+      if (typeof window.ethereum === "undefined") {
+        alert("No wallet found. Please use Coinbase Wallet or MetaMask.");
         return;
       }
 
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const accounts = await provider.send("eth_requestAccounts", []);
-      const address = accounts[0];
+      try {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        const signer = await provider.getSigner();
+        const address = await signer.getAddress();
 
-      document.getElementById("status").innerText =
-        "Connected: " + address;
+        // Switch to BASE network
+        await window.ethereum.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: "0x2105" }] // Base mainnet
+        });
+
+        document.getElementById("status").innerText =
+          "✅ Connected on Base:\n" + address;
+
+      } catch (error) {
+        console.log(error);
+        document.getElementById("status").innerText =
+          "❌ Connection failed: " + error.message;
+      }
     }
   </script>
+
 </body>
 </html>
