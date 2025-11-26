@@ -1,9 +1,5 @@
 {
-  "accountAssociation": {
-    "header": "ReplaceWithHeaderFromBase",
-    "payload": "ReplaceWithPayloadFromBase",
-    "signature": "ReplaceWithSignatureFromBase"
-  },
+  "accountAssociation": {},
 
   "miniapp": {
     "name": "Weylin Arena",
