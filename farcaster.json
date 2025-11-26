@@ -13,9 +13,6 @@
     "description": "1v1 and Solo challenges on Base",
     "category": "game"
   },
-
   "baseBuilder": {
-    "allowed": true,
     "ownerAddress": "0xf2d2b2dE6da6Ea33F51a352A528b2Ee15aC35af7"
   }
-}
