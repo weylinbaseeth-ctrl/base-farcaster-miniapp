@@ -2,17 +2,22 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <title>Base + Farcaster Mini App</title>
+  <title>Weylin Arena</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ✅ CORRECT FARCASTER FRAME META -->
+  <!-- OpenGraph / Preview -->
+  <meta property="og:title" content="Weylin Arena" />
+  <meta property="og:description" content="1v1 and Solo Challenges on Base" />
+  <meta property="og:image" content="https://base-farcaster-miniapp.vercel.app/cover.png" />
+
+  <!-- ✅ FARCASTER FRAME META -->
   <meta property="fc:frame" content="vNext" />
   <meta property="fc:frame:image" content="https://base-farcaster-miniapp.vercel.app/cover.png" />
-  <meta property="fc:frame:button:1" content="Open Mini App" />
+  <meta property="fc:frame:button:1" content="Open Weylin Arena" />
   <meta property="fc:frame:button:1:action" content="link" />
   <meta property="fc:frame:button:1:target" content="https://base-farcaster-miniapp.vercel.app" />
 
-  <!-- ethers.js (no Coinbase SDK needed anymore) -->
+  <!-- ethers.js -->
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.6.2/dist/ethers.umd.min.js"></script>
 
   <style>
@@ -51,8 +56,8 @@
 </head>
 
 <body>
-  <h1>Base + Farcaster Mini App</h1>
-  <p>Connect your wallet on Base</p>
+  <h1>Weylin Arena</h1>
+  <p>1v1 & Solo challenges on Base</p>
 
   <button onclick="connectWallet()">Connect Wallet</button>
 
