@@ -1,17 +1,31 @@
 {
-  "accountAssociation": {},
-
-  "miniapp": {
-    "name": "Weylin Arena",
-    "version": "1.0.0",
-    "iconUrl": "https://base-farcaster-miniapp.vercel.app/cover.png",
-    "homeUrl": "https://base-farcaster-miniapp.vercel.app/",
-    "description": "1v1 and Solo challenges on Base",
-    "category": "game"
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
   },
 
   "baseBuilder": {
     "allowed": true,
     "ownerAddress": "0xf2d2b2dE6da6Ea33F51a352A528b2Ee15aC35af7"
+  },
+
+  "miniapp": {
+    "version": "1.0.0",
+    "name": "Weylin Arena",
+    "homeUrl": "https://base-farcaster-miniapp.vercel.app/",
+    "iconUrl": "https://base-farcaster-miniapp.vercel.app/cover.png",
+    "splashImageUrl": "https://base-farcaster-miniapp.vercel.app/cover.png",
+    "splashBackgroundColor": "#000000",
+    "subtitle": "1v1 and Solo challenges",
+    "description": "Compete in 1v1 and solo challenges on Base.",
+    "primaryCategory": "game",
+    "tags": ["game", "arena", "base", "farcaster"],
+    "heroImageUrl": "https://base-farcaster-miniapp.vercel.app/cover.png",
+    "tagline": "Enter the Arena",
+    "ogTitle": "Weylin Arena",
+    "ogDescription": "1v1 and Solo challenges on Base",
+    "ogImageUrl": "https://base-farcaster-miniapp.vercel.app/cover.png",
+    "noindex": false
   }
 }
